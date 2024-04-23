@@ -1,12 +1,15 @@
 'use client';
 import DownloadIcon from '@app/assets/svg/DownloadIcon';
 import DropdownArrowIcon from '@app/assets/svg/DropdownArrowIcon';
+import { IFilter } from '@app/types';
 import React, { Dispatch, SetStateAction } from 'react';
 
 export default function RevenueDashboard({
   setfilterDialog,
+  filters
 }: {
   setfilterDialog: Dispatch<SetStateAction<boolean>>;
+  filters: IFilter;
 }) {
   return (
     <div className="ml-20 mr-36 w-full">

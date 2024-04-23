@@ -22,10 +22,10 @@ export default function Home() {
         <div className="mb-16 hidden h-fit md:flex">
           <SideBar />
         </div>
-        <RevenueDashboard setfilterDialog={setOpenDialog} />
+        <RevenueDashboard setfilterDialog={setOpenDialog} filters={filters}/>
       </div>
       <div className={`${overlay} ${openDialog ? 'block' : 'hidden'}`}>
-        <FilterDialog setfilterDialog={setOpenDialog} setFilters={setFilters}/>
+        <FilterDialog setfilterDialog={setOpenDialog} setFilters={setFilters} filters={filters}/>
       </div>
     </main>
   );
