@@ -16,6 +16,9 @@ const config: Config = {
       fontFamily: {
         publicSans: ['Public Sans', 'san-serif'],
       },
+      boxShadow: {
+        'navShadow': '0 2px 4px 0px rgba(45, 59, 67, 0.05), 0 2px 6px 0px rgba(45, 59, 67, 0.06)',
+      }
     },
   },
   plugins: [],
