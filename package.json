@@ -6,23 +6,58 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "lint:eslint": "eslint . --fix",
+    "lint:eslint-quiet": "eslint . --fix --quiet",
+    "lint:format": "eslint . --fix && yarn lint:prettier",
+    "lint:prettier-check": "prettier -c .",
+    "lint:prettier": "prettier --write .",
+    "lint:strict": "eslint --max-warnings=0 .",
+    "prepare": "husky"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged",
+      "pre-push": "yarn test"
+    }
+  },
+  "lint-staged": {
+    "**/*.{js,jsx,ts,tsx}": [
+      "yarn lint:eslint",
+      "yarn lint:prettier"
+    ],
+    "**/*.{json,css,scss,md,webmanifest}": [
+      "yarn lint:prettier"
+    ]
   },
   "dependencies": {
     "@types/node": "^20",
     "@types/react": "^18",
     "@types/react-dom": "^18",
-    "eslint": "^9.1.1",
+    "@typescript-eslint/eslint-plugin": "^7.7.1",
+    "@typescript-eslint/parser": "^7.7.1",
+    "eslint": "8.47.0",
     "eslint-config-next": "14.2.2",
     "eslint-config-prettier": "^9.1.0",
+    "eslint-plugin-simple-import-sort": "^12.1.0",
+    "eslint-plugin-unused-imports": "^3.1.0",
+    "lint-staged": "^15.2.2",
     "next": "14.2.2",
     "postcss": "^8",
+    "prettier-plugin-tailwindcss": "^0.5.14",
     "react": "^18",
     "react-dom": "^18",
     "tailwindcss": "^3.4.1",
     "typescript": "^5"
   },
   "devDependencies": {
+    "@commitlint/cli": "^19.2.2",
+    "@commitlint/config-conventional": "^19.2.2",
+    "husky": "^9.0.11",
     "prettier": "^3.2.5"
+  },
+  "resolutions": {
+    "wrap-ansi": "7.0.0",
+    "string-width": "4.1.0"
   }
 }

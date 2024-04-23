@@ -2,3 +2,8 @@
 .next
 dist
 node_modules
+public
+node_modules
+next-env.d.ts
+next.config.ts
+yarn.lock
