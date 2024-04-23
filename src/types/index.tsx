@@ -3,3 +3,10 @@ export interface ImageProps {
   height?: string;
   color?: string;
 }
+
+export interface IFilter {
+    start_date?: string;
+    end_date?: string;
+    transaction_type?: string[];
+    transaction_status?: string[];
+  }
