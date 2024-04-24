@@ -1,10 +1,11 @@
 import React from 'react';
+import {ImageProps} from "@app/types"
 
-export default function DropdownArrowIcon() {
+export default function DropdownArrowIcon({width, height}: ImageProps) {
   return (
     <svg
-      width="12"
-      height="7"
+      width={width || "12"}
+      height={height || "7"}
       viewBox="0 0 12 7"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"

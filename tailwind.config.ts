@@ -19,6 +19,7 @@ const config: Config = {
       boxShadow: {
         'navShadow': '0 2px 4px 0px rgba(45, 59, 67, 0.05), 0 2px 6px 0px rgba(45, 59, 67, 0.06)',
         'sideBarShadow': '0 6px 12px 0px rgba(92, 115, 131, 0.08), 0 4px 8px 0px rgba(92, 115, 131, 0.08)',
+        'dialogShadow': '0 8px 16px 4px rgba(188, 196, 204, 0.1), 0 12px 24px 0px rgba(219, 222, 229, 0.1), 0 16px 32px 0px rgba(219, 222, 229, 0.1)',
       }
     },
   },

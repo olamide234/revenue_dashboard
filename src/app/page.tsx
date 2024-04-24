@@ -5,6 +5,7 @@ import RevenueDashboard from '@app/components/RevenueDashboard';
 import SideBar from '@app/components/SideBar';
 import FilterDialog from '@app/components/FilterDialog';
 import { IFilter } from '@app/types/index';
+// import CalendarFilter from '@app/components/CalendarFilter';
 
 export default function Home() {
   const [openDialog, setOpenDialog] = useState<boolean>(false);
@@ -12,8 +13,15 @@ export default function Home() {
     transaction_type: [],
     transaction_status: []
   })
+  const handleFilter = (filters: object) => {
+    setFilters((prevState: IFilter) => ({
+      ...prevState,
+      ...filters,
+    }));
+  };
+console.log(filters, "filters")
   const overlay =
-    'fixed w-full h-full top-0 right-0 left-0 bottom-0 bg-[#00000080] z-50 cursor-pointer';
+    'fixed w-full h-full top-0 right-0 left-0 bottom-0 bg-[#00000020] z-50 cursor-pointer';
 
   return (
     <main className="h-screen bg-white p-5">
@@ -23,9 +31,14 @@ export default function Home() {
           <SideBar />
         </div>
         <RevenueDashboard setfilterDialog={setOpenDialog} filters={filters}/>
+        {/* <CalendarFilter
+            onFilter={(filter: object) => handleFilter(filter)}
+            enforceSingleDate
+          /> */}
       </div>
       <div className={`${overlay} ${openDialog ? 'block' : 'hidden'}`}>
-        <FilterDialog setfilterDialog={setOpenDialog} setFilters={setFilters} filters={filters}/>
+        <div onClick={() => setOpenDialog(false)} className='absolute w-full h-full'></div>
+        <FilterDialog setfilterDialog={setOpenDialog} handleFilter={handleFilter} filters={filters}/>
       </div>
     </main>
   );
