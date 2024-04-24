@@ -116,9 +116,9 @@ export default function CalendarFilter(props: ICalendarFilterProps) {
             selected={startDate}
             onChange={(date) => {
               setSelectedItem(null);
-              setStartDate(date);
+              setStartDate(date as Date);
               onFilter({
-                start_date: format(new Date(date), 'yyyy-MM-dd'),
+                start_date: format(new Date(date as Date), 'yyyy-MM-dd'),
               } as IDatePayload);
             }}
             startDate={startDate}
@@ -130,9 +130,9 @@ export default function CalendarFilter(props: ICalendarFilterProps) {
             selected={endDate}
             onChange={(date) => {
               setSelectedItem(null);
-              setEndDate(date);
+              setEndDate(date as Date);
               onFilter({
-                end_date: format(new Date(date), 'yyyy-MM-dd'),
+                end_date: format(new Date(date as Date), 'yyyy-MM-dd'),
               } as IDatePayload);
             }}
             endDate={endDate}

@@ -67,7 +67,6 @@ export default function FilterDialog({
       <div className="flex flex-col gap-6 px-[22px]">
         <CalendarFilter
           onFilter={(filter: object) => setDateFilters((prev)=>({...prev, ...filter}))}
-          enforceSingleDate
         />
         <SelectDropdown
           openDropDown={openDropDownType}
