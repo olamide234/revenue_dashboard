@@ -37,7 +37,7 @@ const dateEvents = [
 ];
 
 export default function CalendarFilter(props: ICalendarFilterProps) {
-  const { onFilter, enforceSingleDate = false } = props;
+  const { onFilter } = props;
   const [startDate, setStartDate] = useState(new Date());
   const [endDate, setEndDate] = useState(new Date());
   const [selectedItem, setSelectedItem] = useState<string | null>(null);
