@@ -65,6 +65,7 @@ export default function SelectDropdown({
                   <input
                     type="checkbox"
                     name={id}
+                    checked={openDropDown.value.includes(option.value)}
                     value={option.value}
                     onChange={(e) =>
                       setOpenDropDown((prev: IOpenDropdownType) => {

@@ -24,6 +24,15 @@ export default function FilterDialog({
       state: false,
       value: [],
     });
+
+  const handleCloseDialog = () => {
+    setfilterDialog(false);
+    openDropDownType &&
+      setOpenDropDownType((prev) => ({ ...prev, state: false }));
+    openDropDownStatus &&
+      setOpenDropDownStatus((prev) => ({ ...prev, state: false }));
+  };
+
   const applyFilter = () => {
     const allFilters = {
       ...dateFilters,
@@ -31,7 +40,7 @@ export default function FilterDialog({
       transaction_status: openDropDownStatus.value,
     };
     handleFilter(allFilters);
-    setfilterDialog(false);
+    handleCloseDialog();
   };
   const clearFilter = () => {
     const allFilters = {
@@ -50,7 +59,7 @@ export default function FilterDialog({
       value: [],
     });
     handleFilter(allFilters);
-    setfilterDialog(false);
+    handleCloseDialog();
   };
   const activeButtons =
     dateFilters?.end_date ||
@@ -72,7 +81,7 @@ export default function FilterDialog({
       <div className="flex items-center justify-between rounded-t-[20px] border-2 border-white px-6 py-5">
         <h3 className="text-2xl font-bold text-[#131316]">Filter</h3>
         <button
-          onClick={() => setfilterDialog(false)}
+          onClick={handleCloseDialog}
           className="z-30 rounded-lg p-2 hover:bg-[#EFF1F6]"
         >
           <CloseIcon />
