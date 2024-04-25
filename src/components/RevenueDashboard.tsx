@@ -39,8 +39,7 @@ export default function RevenueDashboard({
 
           <LineChart data={graphData} />
         </div>
-        <div className="flex w-1/3 min-w-fit flex-col gap-8">
-          {/* [16.94rem] */}
+        <div className="flex w-1/3 min-w-fit max-w-[16.94rem] flex-col gap-8">
           <div>
             <div className="mb-2 flex items-center justify-between gap-2 text-sm font-medium text-[#56616B]">
               Ledger Balance

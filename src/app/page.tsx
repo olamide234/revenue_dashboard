@@ -1,11 +1,10 @@
 'use client';
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import NavBar from '@app/components/NavBar';
 import RevenueDashboard from '@app/components/RevenueDashboard';
 import SideBar from '@app/components/SideBar';
 import FilterDialog from '@app/components/FilterDialog';
 import { IFilter } from '@app/types/index';
-// import CalendarFilter from '@app/components/CalendarFilter';
 
 export default function Home() {
   const [openDialog, setOpenDialog] = useState<boolean>(false);
@@ -13,6 +12,33 @@ export default function Home() {
     transaction_type: [],
     transaction_status: []
   })
+  const [user, setUser]= useState()
+  console.log(user, "user")
+
+  useEffect(() => {
+    (() => {
+      try {
+        fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/user`)
+        .then(response => {
+          if (!response.ok) {
+            throw new Error('Network response was not ok');
+          }
+          return response.json(); // Parse the JSON in the response
+        })
+          .then((data) => {
+            setUser(data);
+            return;
+          })
+          .catch((err) => {
+            console.log(err);
+            return;
+          });
+      } catch (error) {
+        console.log("Please check your internet!", error);
+      }
+    })();
+  }, []); //getData, setActivities,
+  
   const handleFilter = (filters: object) => {
     setFilters((prevState: IFilter) => ({
       ...prevState,
@@ -25,7 +51,7 @@ export default function Home() {
 
   return (
     <main className="h-screen bg-white p-5 min-w-[700px]">
-      <NavBar />
+      <NavBar userData={user}/>
       <div className="flex h-[calc(100vh-110px)]">
         <div className='h-full flex items-center'>
         <div className="mb-16 hidden h-fit md:flex">
@@ -33,10 +59,6 @@ export default function Home() {
         </div>
         </div>
         <RevenueDashboard setfilterDialog={setOpenDialog} filters={filters}/>
-        {/* <CalendarFilter
-            onFilter={(filter: object) => handleFilter(filter)}
-            enforceSingleDate
-          /> */}
       </div>
       <div className={`${overlay} ${openDialog ? 'block' : 'hidden'}`}>
         <div onClick={() => setOpenDialog(false)} className='absolute w-full h-full'></div>
