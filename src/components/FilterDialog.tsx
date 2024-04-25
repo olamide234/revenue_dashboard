@@ -68,6 +68,7 @@ export default function FilterDialog({
 
   const activeButtons =
     dateFilters?.end_date ||
+    dateFilters?.start_date ||
     openDropDownType.value.length > 0 ||
     openDropDownStatus.value.length > 0;
   const inactiveApplyButton = 'bg-[#DBDEE5] text-white';
@@ -90,11 +91,13 @@ export default function FilterDialog({
             setDateFilters((prev) => ({ ...prev, ...filter }))
           }
           closeOtherModal={closeOtherModal}
+          reset={filters?.end_date === undefined && filters?.start_date === undefined}
         />
         <SelectDropdown
           openDropDown={openDropDownType}
           setOpenDropDown={(val) => {
-            closeOtherModal();
+            openDropDownStatus &&
+            setOpenDropDownStatus((prev) => ({ ...prev, state: false }));
             setOpenDropDownType(val);
           }}
           optionList={transactionTypes}
@@ -104,7 +107,8 @@ export default function FilterDialog({
         <SelectDropdown
           openDropDown={openDropDownStatus}
           setOpenDropDown={(val) => {
-            closeOtherModal();
+            openDropDownType &&
+            setOpenDropDownType((prev) => ({ ...prev, state: false }));
             setOpenDropDownStatus(val);
           }}
           optionList={transactionStatus}

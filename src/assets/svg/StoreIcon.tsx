@@ -1,6 +1,6 @@
 import React from 'react';
 
-export default function StoreIcon() {
+export default function StoreIcon({greyedOut}:{greyedOut: boolean}) {
   return (
     <svg
       width="20"
@@ -8,6 +8,7 @@ export default function StoreIcon() {
       viewBox="0 0 20 22"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
+      className={`${greyedOut && "black-and-white"}`}
     >
       <path
         d="M16.9998 21.0599H2.97984C2.62984 21.0599 2.33984 20.7799 2.33984 20.4199V6.39995C2.33984 6.04995 2.61984 5.75995 2.97984 5.75995H16.9998C17.3498 5.75995 17.6398 6.03995 17.6398 6.39995V20.4199C17.6398 20.7699 17.3498 21.0599 16.9998 21.0599Z"

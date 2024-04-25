@@ -1,6 +1,6 @@
 import React from 'react';
 
-export default function BioLinkIcon() {
+export default function BioLinkIcon({greyedOut}:{greyedOut: boolean}) {
   return (
     <svg
       width="24"
@@ -8,6 +8,7 @@ export default function BioLinkIcon() {
       viewBox="0 0 24 24"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
+      className={`${greyedOut && "black-and-white"}`}
     >
       <path
         d="M12.5073 12.9H8.50732C6.15732 12.9 4.25732 11 4.25732 8.65V8.25C4.25732 5.9 6.15732 4 8.50732 4H12.5073C14.8573 4 16.7573 5.9 16.7573 8.25V8.65C16.7573 10.99 14.8473 12.9 12.5073 12.9Z"

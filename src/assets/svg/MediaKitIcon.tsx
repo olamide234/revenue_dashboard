@@ -1,6 +1,6 @@
 import React from 'react';
 
-export default function MediaKitIcon() {
+export default function MediaKitIcon({greyedOut}:{greyedOut: boolean}) {
   return (
     <svg
       width="24"
@@ -8,6 +8,7 @@ export default function MediaKitIcon() {
       viewBox="0 0 24 24"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
+      className={`${greyedOut && "black-and-white"}`}
     >
       <path
         d="M15.8403 4.92499V11.025C15.8403 11.415 15.5303 11.725 15.1403 11.725H9.98027C9.59027 11.725 9.28027 11.415 9.28027 11.025V10.055H4.98027C4.59027 10.055 4.28027 9.74499 4.28027 9.35499V3.25499C4.28027 2.86499 4.59027 2.55499 4.98027 2.55499H10.1403C10.5303 2.55499 10.8403 2.86499 10.8403 3.25499V4.22499H15.1403C15.5203 4.22499 15.8403 4.54499 15.8403 4.92499Z"

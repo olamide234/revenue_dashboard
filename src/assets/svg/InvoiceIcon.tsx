@@ -1,6 +1,6 @@
 import React from 'react';
 
-export default function InvoiceIcon({ colourless }: { colourless?: boolean }) {
+export default function InvoiceIcon({ greyedOut }: { greyedOut: boolean }) {
   return (
     <svg
       width="24"
@@ -8,6 +8,7 @@ export default function InvoiceIcon({ colourless }: { colourless?: boolean }) {
       viewBox="0 0 24 24"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
+      className={`${greyedOut && "black-and-white"}`}
     >
       <path
         d="M20.5202 6.64998V21.05C20.5202 21.63 20.0502 22.1 19.4702 22.1H9.29023C8.71023 22.1 8.24023 21.63 8.24023 21.05V20.16L17.3402 16.72C17.7002 16.58 17.9402 16.24 17.9402 15.85V5.59998H19.4702C20.0502 5.59998 20.5202 6.06998 20.5202 6.64998Z"
