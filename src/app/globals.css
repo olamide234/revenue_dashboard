@@ -99,3 +99,32 @@ div::-webkit-scrollbar-thumb {
 .black-and-white {
   filter: grayscale(100%);
 }
+
+.progress-outer-container {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  margin-top: 5rem;
+}
+
+.progress-container {
+  position: relative;
+  width: 50px;
+  height: 50px;
+}
+
+.progress-inner {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  border: 5px solid #131316; 
+  border-top: 5px solid #ffffff; 
+  animation: spin 2s linear infinite; /* Animation */
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}

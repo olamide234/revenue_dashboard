@@ -5,6 +5,7 @@ import RevenueDashboard from '@app/components/RevenueDashboard';
 import SideBar from '@app/components/SideBar';
 import FilterDialog from '@app/components/FilterDialog';
 import { IFilter } from '@app/types/index';
+import LoaderWrapper from '@app/components/LoaderWrapper';
 
 export default function Home() {
   const [openDialog, setOpenDialog] = useState<boolean>(false);
@@ -102,18 +103,23 @@ export default function Home() {
   return (
     <main className="h-screen min-w-[700px] bg-white p-5">
       <NavBar userData={user} />
+
       <div className="flex h-[calc(100vh-110px)]">
         <div className="flex h-full items-center">
           <div className="mb-16 hidden h-fit md:flex">
             <SideBar />
           </div>
         </div>
-        <RevenueDashboard
-          setfilterDialog={setOpenDialog}
-          filters={filters}
-          userWallet={wallet}
-          userTransactions={transactions}
-        />
+        <LoaderWrapper
+          loading={wallet === undefined || transactions === undefined}
+        >
+          <RevenueDashboard
+            setfilterDialog={setOpenDialog}
+            filters={filters}
+            userWallet={wallet}
+            userTransactions={transactions}
+          />
+        </LoaderWrapper>
       </div>
       <div className={`${overlay} ${openDialog ? 'block' : 'hidden'}`}>
         <div
