@@ -6,6 +6,7 @@ import SlantDownArrow from '@app/assets/svg/SlantDownArrow';
 import SlantUpArrow from '@app/assets/svg/SlantUpArrow';
 import { IFilter } from '@app/types';
 import React, { Dispatch, SetStateAction } from 'react';
+import LineChart from './LineChart';
 
 export default function RevenueDashboard({
   setfilterDialog,
@@ -20,8 +21,8 @@ export default function RevenueDashboard({
   };
   return (
     <div className="ml-20 mr-36 w-full">
-      <div className="my-16 flex gap-72">
-        <div>
+      <div className="my-16 flex justify-between">
+        <div className='w-2/3'>
           <div className="flex items-center gap-16">
             <div>
               <div className="mb-2 text-sm font-medium text-[#56616B]">
@@ -35,7 +36,9 @@ export default function RevenueDashboard({
               Withdraw
             </button>
           </div>
-          <></>
+          <div className='h-64'>
+            <LineChart data={graphData} />
+          </div>
         </div>
         <div className="flex w-[16.94rem] min-w-fit flex-col gap-8">
           <div>
@@ -99,7 +102,7 @@ export default function RevenueDashboard({
           </div>
         </div>
         <div className="pt-10">
-          <div className="flex h-[12rem] flex-col pr-2 gap-6 overflow-auto">
+          <div className="flex h-[12rem] flex-col gap-6 overflow-auto pr-2">
             {Array(7)
               .fill('a')
               .map((item, index) => (
@@ -132,3 +135,60 @@ const backgroundColor = {
   OTHERS: 'bg-[#E3FCF2]',
   CASHWITHDRAWAL: 'bg-[#F9E3E0]',
 };
+
+const graphData = [
+  {
+    id: 'japan',
+    color: 'hsl(26, 70%, 50%)',
+    data: [
+      {
+        x: 'plane',
+        y: 283,
+      },
+      {
+        x: 'helicopter',
+        y: 132,
+      },
+      {
+        x: 'boat',
+        y: 125,
+      },
+      {
+        x: 'train',
+        y: 56,
+      },
+      {
+        x: 'subway',
+        y: 289,
+      },
+      {
+        x: 'bus',
+        y: 295,
+      },
+      {
+        x: 'car',
+        y: 45,
+      },
+      {
+        x: 'moto',
+        y: 167,
+      },
+      {
+        x: 'bicycle',
+        y: 137,
+      },
+      {
+        x: 'horse',
+        y: 197,
+      },
+      {
+        x: 'skateboard',
+        y: 132,
+      },
+      {
+        x: 'others',
+        y: 218,
+      },
+    ],
+  },
+];
