@@ -39,7 +39,7 @@ const dateEvents = [
 ];
 
 export default function CalendarFilter(props: ICalendarFilterProps) {
-  const { onFilter, closeOtherModal } = props;
+  const { onFilter, closeOtherModal, reset } = props;
   const [startDate, setStartDate] = useState(new Date());
   const [endDate, setEndDate] = useState(new Date());
   const [selectedItem, setSelectedItem] = useState<string | null>(null);
@@ -82,6 +82,15 @@ export default function CalendarFilter(props: ICalendarFilterProps) {
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [selectedItem]);
+  reset;
+
+  useEffect(() => {
+    if (reset) {
+      setStartDate(new Date());
+      setEndDate(new Date());
+      setSelectedItem(null)
+    }
+  }, [reset]);
 
   const CustomInput = forwardRef<
     HTMLButtonElement,

@@ -16,6 +16,7 @@ export interface IFilter {
 export interface ICalendarFilterProps {
   onFilter: (filter: { start_date?: string; end_date?: string }) => void;
   closeOtherModal: () => void;
+  reset: boolean;
 }
 
 export interface IStatus {
