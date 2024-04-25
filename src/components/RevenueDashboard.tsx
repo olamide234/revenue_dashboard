@@ -20,33 +20,33 @@ export default function RevenueDashboard({
     return 'bg-[#E3FCF2]';
   };
   return (
-    <div className="ml-20 mr-36 w-full">
-      <div className="my-16 flex justify-between">
-        <div className='w-2/3'>
+    <div className="ml-5 mr-9 w-full lg:ml-20 lg:mr-36">
+      <div className="my-16 flex justify-between gap-6">
+        <div className="w-2/3">
           <div className="flex items-center gap-16">
             <div>
               <div className="mb-2 text-sm font-medium text-[#56616B]">
                 Available Balance
               </div>
-              <div className="text-4xl font-bold text-[#131316]">
+              <div className="text-2xl font-bold text-[#131316] lg:text-4xl">
                 USD 120,500.00
               </div>
             </div>
-            <button className="rounded-[100px] bg-[#131316] px-7 py-3.5 font-semibold text-white">
+            <button className="rounded-[100px] bg-[#131316] px-7 py-3.5 text-xs font-semibold text-white lg:text-base">
               Withdraw
             </button>
           </div>
-          <div className='h-64'>
-            <LineChart data={graphData} />
-          </div>
+
+          <LineChart data={graphData} />
         </div>
-        <div className="flex w-[16.94rem] min-w-fit flex-col gap-8">
+        <div className="flex w-1/3 min-w-fit flex-col gap-8">
+          {/* [16.94rem] */}
           <div>
             <div className="mb-2 flex items-center justify-between gap-2 text-sm font-medium text-[#56616B]">
               Ledger Balance
               <CautionIcon />
             </div>
-            <div className="text-[1.75rem] font-bold text-[#131316]">
+            <div className="text-xl font-bold text-[#131316] lg:text-[1.75rem]">
               USD 0.00
             </div>
           </div>
@@ -55,7 +55,7 @@ export default function RevenueDashboard({
               Total Payout
               <CautionIcon />
             </div>
-            <div className="text-[1.75rem] font-bold text-[#131316]">
+            <div className="text-xl font-bold text-[#131316] lg:text-[1.75rem]">
               USD 55,080.00
             </div>
           </div>
@@ -64,7 +64,7 @@ export default function RevenueDashboard({
               Total Revenue
               <CautionIcon />
             </div>
-            <div className="text-[1.75rem] font-bold text-[#131316]">
+            <div className="text-xl font-bold text-[#131316] lg:text-[1.75rem]">
               USD 175,580.00
             </div>
           </div>
@@ -73,7 +73,7 @@ export default function RevenueDashboard({
               Pending Payout
               <CautionIcon />
             </div>
-            <div className="text-[1.75rem] font-bold text-[#131316]">
+            <div className="text-xl font-bold text-[#131316] lg:text-[1.75rem]">
               USD 0.00
             </div>
           </div>
@@ -82,7 +82,9 @@ export default function RevenueDashboard({
       <div>
         <div className="flex justify-between gap-6 border-b border-b-[#EFF1F6] pb-6">
           <div>
-            <p className="text-2xl font-bold text-[#131316]">24 Transactions</p>
+            <p className="text-xl font-bold text-[#131316] lg:text-2xl">
+              24 Transactions
+            </p>
             <p className="text-sm font-medium text-[#56616B]">
               Your transactions for the last 7 days
             </p>
