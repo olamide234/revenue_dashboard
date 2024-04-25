@@ -11,6 +11,13 @@ import AppsIcon from '@app/assets/svg/AppsIcon';
 import NotificationIcon from '@app/assets/svg/NotificationIcon';
 import ChatIcon from '@app/assets/svg/ChatIcon';
 import MenuIcon from '@app/assets/svg/MenuIcon';
+import nameInitials from '@app/utils/nameInitials';
+
+interface IUserData {
+  email: string;
+  first_name: string;
+  last_name: string;
+}
 
 const links = [
   {
@@ -40,19 +47,19 @@ const links = [
   },
 ];
 
-export default function NavBar() {
+export default function NavBar({ userData }: { userData: IUserData | undefined }) {
   const currentRoute = usePathname();
 
   const activeStyle = 'bg-[#131316] text-white';
   const nonActiveLink = 'bg-white text-[#56616B] hover:bg-[#EFF1F6]';
   return (
-    <nav className="shadow-navShadow flex h-16 items-center justify-between rounded-[100px] border-2 border-white p-2 lg:p-4">
+    <nav className="flex h-16 items-center justify-between rounded-[100px] border-2 border-white p-2 shadow-navShadow lg:p-4">
       <MainStackLogo />
-      <ul className="hidden md:flex items-center md:gap-1 lg:gap-5">
+      <ul className="hidden items-center md:flex md:gap-1 lg:gap-5">
         {links.map((link, index) => (
           <li
             key={index}
-            className={`${currentRoute === link.href ? activeStyle : nonActiveLink} rounded-[100px] py-2 pl-[14px] pr-[18px] font-semibold text-xs lg:text-base`}
+            className={`${currentRoute === link.href ? activeStyle : nonActiveLink} rounded-[100px] py-2 pl-[14px] pr-[18px] text-xs font-semibold lg:text-base`}
           >
             <Link href={link.href} className="flex items-center gap-1">
               {link.icon}
@@ -70,7 +77,7 @@ export default function NavBar() {
         </span>
         <div className="flex items-center gap-2 rounded-[100px] bg-[#EFF1F6] py-1 pl-[5px] pr-3">
           <div className="flex h-8 w-8 items-center justify-center rounded-full bg-gradient-to-r from-[#5C6670] to-[#131316] text-white">
-            OJ
+            {userData && nameInitials(userData.first_name, userData.last_name)}
           </div>
           <MenuIcon />
         </div>
