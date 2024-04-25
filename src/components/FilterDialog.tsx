@@ -25,12 +25,16 @@ export default function FilterDialog({
       value: [],
     });
 
-  const handleCloseDialog = () => {
-    setfilterDialog(false);
+  const closeOtherModal = () => {
     openDropDownType &&
       setOpenDropDownType((prev) => ({ ...prev, state: false }));
     openDropDownStatus &&
       setOpenDropDownStatus((prev) => ({ ...prev, state: false }));
+  };
+
+  const handleCloseDialog = () => {
+    setfilterDialog(false);
+    closeOtherModal();
   };
 
   const applyFilter = () => {
@@ -61,6 +65,7 @@ export default function FilterDialog({
     handleFilter(allFilters);
     handleCloseDialog();
   };
+
   const activeButtons =
     dateFilters?.end_date ||
     openDropDownType.value.length > 0 ||
@@ -69,20 +74,12 @@ export default function FilterDialog({
   const activeApplyButton = 'bg-[#131316] text-white';
   return (
     <div className="absolute bottom-2 right-2 top-2 w-1/3 min-w-[28.5rem] rounded-[20px] bg-white shadow-dialogShadow">
-      <div
-        onClick={() => {
-          openDropDownType &&
-            setOpenDropDownType((prev) => ({ ...prev, state: false }));
-          openDropDownStatus &&
-            setOpenDropDownStatus((prev) => ({ ...prev, state: false }));
-        }}
-        className="absolute h-full w-full"
-      ></div>
+      <div onClick={closeOtherModal} className="absolute h-full w-full"></div>
       <div className="flex items-center justify-between rounded-t-[20px] border-2 border-white px-6 py-5">
         <h3 className="text-2xl font-bold text-[#131316]">Filter</h3>
         <button
           onClick={handleCloseDialog}
-          className="z-30 rounded-lg p-2 hover:bg-[#EFF1F6]"
+          className="z-20 rounded-lg p-2 hover:bg-[#EFF1F6]"
         >
           <CloseIcon />
         </button>
@@ -92,17 +89,24 @@ export default function FilterDialog({
           onFilter={(filter: object) =>
             setDateFilters((prev) => ({ ...prev, ...filter }))
           }
+          closeOtherModal={closeOtherModal}
         />
         <SelectDropdown
           openDropDown={openDropDownType}
-          setOpenDropDown={setOpenDropDownType}
+          setOpenDropDown={(val) => {
+            closeOtherModal();
+            setOpenDropDownType(val);
+          }}
           optionList={transactionTypes}
           label="Transaction Type"
           id="transaction_type"
         />
         <SelectDropdown
           openDropDown={openDropDownStatus}
-          setOpenDropDown={setOpenDropDownStatus}
+          setOpenDropDown={(val) => {
+            closeOtherModal();
+            setOpenDropDownStatus(val);
+          }}
           optionList={transactionStatus}
           label="Transaction Status"
           id="transaction_status"

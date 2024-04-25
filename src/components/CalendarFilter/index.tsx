@@ -39,7 +39,7 @@ const dateEvents = [
 ];
 
 export default function CalendarFilter(props: ICalendarFilterProps) {
-  const { onFilter } = props;
+  const { onFilter, closeOtherModal } = props;
   const [startDate, setStartDate] = useState(new Date());
   const [endDate, setEndDate] = useState(new Date());
   const [selectedItem, setSelectedItem] = useState<string | null>(null);
@@ -89,7 +89,10 @@ export default function CalendarFilter(props: ICalendarFilterProps) {
   >((props, ref) => (
     <button
       className={`flex w-full items-center gap-2.5 rounded-xl px-4 py-3.5 ${'border border-[#EFF1F6] bg-[#EFF1F6]'}`}
-      onClick={props.onClick}
+      onClick={(e: React.MouseEvent<HTMLButtonElement>) => {
+        closeOtherModal();
+        props.onClick?.(e);
+      }}
       ref={ref}
     >
       <div className="w-full text-left">{props.value}</div>
@@ -144,8 +147,11 @@ export default function CalendarFilter(props: ICalendarFilterProps) {
         {dateEvents.map((v) => (
           <div
             key={v.value}
-            onClick={() => setSelectedItem(v.value)}
-            className={`${selectedItem === v.value ? selectedRangeFilter : unselectedRangeFilter} z-30 cursor-pointer text-nowrap rounded-[100px] border border-[#EFF1F6] px-[10px] py-2 text-sm font-semibold text-[#131316]`}
+            onClick={() => {
+              closeOtherModal();
+              setSelectedItem(v.value);
+            }}
+            className={`${selectedItem === v.value ? selectedRangeFilter : unselectedRangeFilter} z-20 cursor-pointer text-nowrap rounded-[100px] border border-[#EFF1F6] px-[10px] py-2 text-sm font-semibold text-[#131316]`}
           >
             {v.name}
           </div>
