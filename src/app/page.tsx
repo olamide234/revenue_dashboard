@@ -13,7 +13,8 @@ export default function Home() {
     transaction_status: []
   })
   const [user, setUser]= useState()
-  console.log(user, "user")
+  const [wallet, setWallet]= useState()
+  console.log(wallet, "wallet")
 
   useEffect(() => {
     (() => {
@@ -37,7 +38,32 @@ export default function Home() {
         console.log("Please check your internet!", error);
       }
     })();
-  }, []); //getData, setActivities,
+  }, []);
+
+  
+  useEffect(() => {
+    (() => {
+      try {
+        fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/wallet`)
+        .then(response => {
+          if (!response.ok) {
+            throw new Error('Network response was not ok');
+          }
+          return response.json(); // Parse the JSON in the response
+        })
+          .then((data) => {
+            setWallet(data);
+            return;
+          })
+          .catch((err) => {
+            console.log(err);
+            return;
+          });
+      } catch (error) {
+        console.log("Please check your internet!", error);
+      }
+    })();
+  }, []);
   
   const handleFilter = (filters: object) => {
     setFilters((prevState: IFilter) => ({
@@ -58,7 +84,7 @@ export default function Home() {
           <SideBar />
         </div>
         </div>
-        <RevenueDashboard setfilterDialog={setOpenDialog} filters={filters}/>
+        <RevenueDashboard setfilterDialog={setOpenDialog} filters={filters} userWallet={wallet}/>
       </div>
       <div className={`${overlay} ${openDialog ? 'block' : 'hidden'}`}>
         <div onClick={() => setOpenDialog(false)} className='absolute w-full h-full'></div>
