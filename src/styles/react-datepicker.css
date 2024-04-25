@@ -120,3 +120,11 @@
 .react-datepicker__month-container {
   width: 100%;
 }
+
+.react-datepicker__day--disabled {
+  color: #56616B;
+}
+
+.react-datepicker__day--outside-month {
+  color: white /* #aaaaaa */
+}

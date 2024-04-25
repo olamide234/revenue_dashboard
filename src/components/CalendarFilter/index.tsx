@@ -13,7 +13,7 @@ import {
 import { format } from 'date-fns';
 import DatePicker from 'react-datepicker';
 import '@app/styles/react-datepicker.css';
-import UpArrowIcon from '@app/assets/svg/UpArrowIcon';
+// import UpArrowIcon from '@app/assets/svg/UpArrowIcon';
 import DropdownArrowIcon from '@app/assets/svg/DropdownArrowIcon';
 
 export interface IDatePayload
@@ -43,7 +43,7 @@ export default function CalendarFilter(props: ICalendarFilterProps) {
   const [startDate, setStartDate] = useState(new Date());
   const [endDate, setEndDate] = useState(new Date());
   const [selectedItem, setSelectedItem] = useState<string | null>(null);
-  const [calendarOpen, setCalendarOpen] = useState({ value: '', state: false });
+  // const [calendarOpen, setCalendarOpen] = useState({ value: '', state: false });
 
   const unselectedRangeFilter = 'bg-white text-[#131316]';
   const selectedRangeFilter = 'bg-[#131316] text-white';
@@ -83,44 +83,44 @@ export default function CalendarFilter(props: ICalendarFilterProps) {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [selectedItem]);
 
-  // const CustomInput = forwardRef<
-  //   HTMLButtonElement,
-  //   React.ComponentProps<'button'>
-  // >((props, ref) => (
-  //   <button
-  //     className={`flex w-full items-center gap-2.5 rounded-xl px-4 py-3.5 ${'border border-[#EFF1F6] bg-[#EFF1F6]'}`}
-  //     onClick={props.onClick}
-  //     ref={ref}
-  //   >
-  //     <div className="w-full text-left">{props.value}</div>
-
-  //     <DropdownArrowIcon width="8.83px" height="5.02px" />
-  //   </button>
-  // ));
-
   const CustomInput = forwardRef<
     HTMLButtonElement,
     React.ComponentProps<'button'>
-  >((props, ref) => {
-    const isCalendarOpen = calendarOpen.state && calendarOpen.value === props.value;
-    return (
-      <button
-        className={`flex w-full items-center gap-2.5 rounded-xl px-4 py-3.5 ${isCalendarOpen ? 'border-[3px] border-[#131316] bg-white' : 'border border-[#EFF1F6] bg-[#EFF1F6]'}`}
-        onClick={(e) => {
-          setCalendarOpen({ value: props.value as string, state: true });
-          props.onClick?.(e);
-        }}
-        ref={ref}
-      >
-        <div className="w-full text-left">{props.value}</div>
-        {isCalendarOpen ? (
-          <UpArrowIcon />
-        ) : (
-          <DropdownArrowIcon width="8.83px" height="5.02px" />
-        )}
-      </button>
-    );
-  });
+  >((props, ref) => (
+    <button
+      className={`flex w-full items-center gap-2.5 rounded-xl px-4 py-3.5 ${'border border-[#EFF1F6] bg-[#EFF1F6]'}`}
+      onClick={props.onClick}
+      ref={ref}
+    >
+      <div className="w-full text-left">{props.value}</div>
+
+      <DropdownArrowIcon width="8.83px" height="5.02px" />
+    </button>
+  ));
+
+  // const CustomInput = forwardRef<
+  //   HTMLButtonElement,
+  //   React.ComponentProps<'button'>
+  // >((props, ref) => {
+  //   const isCalendarOpen = calendarOpen.state && calendarOpen.value === props.value;
+  //   return (
+  //     <button
+  //       className={`flex w-full items-center gap-2.5 rounded-xl px-4 py-3.5 ${isCalendarOpen ? 'border-[3px] border-[#131316] bg-white' : 'border border-[#EFF1F6] bg-[#EFF1F6]'}`}
+  //       onClick={(e) => {
+  //         setCalendarOpen({ value: props.value as string, state: true });
+  //         props.onClick?.(e);
+  //       }}
+  //       ref={ref}
+  //     >
+  //       <div className="w-full text-left">{props.value}</div>
+  //       {isCalendarOpen ? (
+  //         <UpArrowIcon />
+  //       ) : (
+  //         <DropdownArrowIcon width="8.83px" height="5.02px" />
+  //       )}
+  //     </button>
+  //   );
+  // });
 
   const handleSelectRange = (dates: { startDate: Date; endDate: Date }) => {
     const { startDate: start, endDate: end } = dates;
@@ -163,9 +163,9 @@ export default function CalendarFilter(props: ICalendarFilterProps) {
                 onFilter({
                   start_date: format(new Date(date as Date), 'yyyy-MM-dd'),
                 } as IDatePayload);
-                calendarOpen.state && setCalendarOpen({ value: '', state: false });
+                // calendarOpen.state && setCalendarOpen({ value: '', state: false });
               }}
-              onBlur={()=>setCalendarOpen({ value: '', state: false })}
+              // onBlur={()=>setCalendarOpen({ value: '', state: false })}
               startDate={startDate}
               selectsStart
               maxDate={startDate ? endDate : undefined}
@@ -185,7 +185,7 @@ export default function CalendarFilter(props: ICalendarFilterProps) {
                 onFilter({
                   end_date: format(new Date(date as Date), 'yyyy-MM-dd'),
                 } as IDatePayload);
-                calendarOpen.state && setCalendarOpen({ value: '', state: false });
+                // calendarOpen.state && setCalendarOpen({ value: '', state: false });
               }}
               endDate={endDate}
               selectsEnd
