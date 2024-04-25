@@ -13,7 +13,7 @@ import {
 import { format } from 'date-fns';
 import DatePicker from 'react-datepicker';
 import '@app/styles/react-datepicker.css';
-import UpArrowIcon from '@app/assets/svg/UpArrowIcon';
+// import UpArrowIcon from '@app/assets/svg/UpArrowIcon';
 import DropdownArrowIcon from '@app/assets/svg/DropdownArrowIcon';
 
 export interface IDatePayload
