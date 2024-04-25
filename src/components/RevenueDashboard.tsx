@@ -6,12 +6,12 @@ import SlantDownArrow from '@app/assets/svg/SlantDownArrow';
 import SlantUpArrow from '@app/assets/svg/SlantUpArrow';
 import { IFilter } from '@app/types';
 import React, { Dispatch, SetStateAction } from 'react';
-import LineChart from './LineChart';
+import LineChart, { IExpectedData } from './LineChart';
 import numberWithCommas from '@app/utils/numberWithCommas';
 import { numberWithCommasNR } from '@app/utils/numberWithCommas';
 import capitalizeFirstLetter from '@app/utils/capitalizeFirstLetter';
 import { IStatus, ITransactionAvatarBgColor } from '@app/types';
-import {format} from 'date-fns'
+import { format } from 'date-fns';
 
 interface IUserWallet {
   balance: number;
@@ -48,6 +48,29 @@ export default function RevenueDashboard({
   userWallet: IUserWallet | undefined;
   userTransactions: IUserTransaction[] | undefined;
 }) {
+  const graphData = (): IExpectedData => {
+    const dateRangeData: string[] = [];
+    const transactions = userTransactions
+      ? userTransactions?.map((userTransaction, index) => {
+          dateRangeData.push(userTransaction.date);
+          return {
+            x: String(index),
+            y: userTransaction?.amount,
+          };
+        })
+      : [];
+    const progressingTransactions = transactions.reverse();
+    const gD = [
+      {
+        id: 'payment',
+        color: 'hsl(19, 100%, 51%)',
+        data: progressingTransactions,
+      },
+    ];
+
+    return { graphData: gD, dateRangeData: dateRangeData };
+  };
+
   return (
     <div className="ml-5 mr-9 w-full lg:ml-20 lg:mr-36">
       <div className="my-16 flex justify-between gap-6">
@@ -66,7 +89,7 @@ export default function RevenueDashboard({
             </button>
           </div>
 
-          <LineChart data={graphData} />
+          <LineChart data={graphData()} />
         </div>
         <div className="flex w-1/3 min-w-fit max-w-[16.94rem] flex-col gap-8">
           <div>
@@ -178,60 +201,3 @@ const transactionTextColor: IStatus = {
   successful: 'text-[#0EA163]',
   pending: 'text-[#A77A07]',
 };
-
-const graphData = [
-  {
-    id: 'japan',
-    color: 'hsl(26, 70%, 50%)',
-    data: [
-      {
-        x: 'plane',
-        y: 283,
-      },
-      {
-        x: 'helicopter',
-        y: 132,
-      },
-      {
-        x: 'boat',
-        y: 125,
-      },
-      {
-        x: 'train',
-        y: 56,
-      },
-      {
-        x: 'subway',
-        y: 289,
-      },
-      {
-        x: 'bus',
-        y: 295,
-      },
-      {
-        x: 'car',
-        y: 45,
-      },
-      {
-        x: 'moto',
-        y: 167,
-      },
-      {
-        x: 'bicycle',
-        y: 137,
-      },
-      {
-        x: 'horse',
-        y: 197,
-      },
-      {
-        x: 'skateboard',
-        y: 132,
-      },
-      {
-        x: 'others',
-        y: 218,
-      },
-    ],
-  },
-];

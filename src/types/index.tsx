@@ -1,4 +1,4 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */ 
+/* eslint-disable @typescript-eslint/no-explicit-any */
 
 export interface ImageProps {
   width?: string;
@@ -14,10 +14,7 @@ export interface IFilter {
 }
 
 export interface ICalendarFilterProps {
-  onFilter: (filter: {
-    start_date?: string;
-    end_date?: string;
-  }) => void;
+  onFilter: (filter: { start_date?: string; end_date?: string }) => void;
 }
 
 export interface IStatus {
