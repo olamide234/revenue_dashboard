@@ -19,3 +19,13 @@ export interface ICalendarFilterProps {
     end_date?: string;
   }) => void;
 }
+
+export interface IStatus {
+  successful: string;
+  pending: string;
+}
+
+export interface ITransactionAvatarBgColor {
+  withdrawal: string;
+  deposit: string;
+}

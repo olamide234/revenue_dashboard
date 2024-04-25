@@ -4,3 +4,6 @@ export default function numberWithCommas(x: number) {
     });
   }
   
+  export function numberWithCommasNR(x: number) {
+    return Number(x).toLocaleString("en-US");
+  }
