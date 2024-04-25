@@ -7,7 +7,7 @@ import SlantUpArrow from '@app/assets/svg/SlantUpArrow';
 import { IFilter } from '@app/types';
 import React, { Dispatch, SetStateAction } from 'react';
 import LineChart from './LineChart';
-import numberWithCommas from "@app/utils/numberWithCommas"
+import numberWithCommas from '@app/utils/numberWithCommas';
 
 export default function RevenueDashboard({
   setfilterDialog,
@@ -16,13 +16,15 @@ export default function RevenueDashboard({
 }: {
   setfilterDialog: Dispatch<SetStateAction<boolean>>;
   filters: IFilter;
-  userWallet: {
-    balance: number;
-    ledger_balance: number;
-    pending_payout: number;
-    total_payout: number;
-    total_revenue: number;
-  } | undefined;
+  userWallet:
+    | {
+        balance: number;
+        ledger_balance: number;
+        pending_payout: number;
+        total_payout: number;
+        total_revenue: number;
+      }
+    | undefined;
 }) {
   return (
     <div className="ml-5 mr-9 w-full lg:ml-20 lg:mr-36">
@@ -51,7 +53,7 @@ export default function RevenueDashboard({
               <CautionIcon />
             </div>
             <div className="text-xl font-bold text-[#131316] lg:text-[1.75rem]">
-            {`USD ${numberWithCommas(userWallet?.ledger_balance)}`}
+              {`USD ${userWallet && numberWithCommas(userWallet?.ledger_balance)}`}
             </div>
           </div>
           <div>
@@ -60,7 +62,7 @@ export default function RevenueDashboard({
               <CautionIcon />
             </div>
             <div className="text-xl font-bold text-[#131316] lg:text-[1.75rem]">
-            {`USD ${numberWithCommas(userWallet?.total_payout)}`}
+              {`USD ${userWallet && numberWithCommas(userWallet?.total_payout)}`}
             </div>
           </div>
           <div>
@@ -69,7 +71,7 @@ export default function RevenueDashboard({
               <CautionIcon />
             </div>
             <div className="text-xl font-bold text-[#131316] lg:text-[1.75rem]">
-            {`USD ${numberWithCommas(userWallet?.total_revenue)}`}
+              {`USD ${userWallet && numberWithCommas(userWallet?.total_revenue)}`}
             </div>
           </div>
           <div>
@@ -78,7 +80,7 @@ export default function RevenueDashboard({
               <CautionIcon />
             </div>
             <div className="text-xl font-bold text-[#131316] lg:text-[1.75rem]">
-            {`USD ${numberWithCommas(userWallet?.total_payout)}`}
+              {`USD ${userWallet && numberWithCommas(userWallet?.total_payout)}`}
             </div>
           </div>
         </div>
