@@ -2,6 +2,8 @@
 import CautionIcon from '@app/assets/svg/CautionIcon';
 import DownloadIcon from '@app/assets/svg/DownloadIcon';
 import DropdownArrowIcon from '@app/assets/svg/DropdownArrowIcon';
+import SlantDownArrow from '@app/assets/svg/SlantDownArrow';
+import SlantUpArrow from '@app/assets/svg/SlantUpArrow';
 import { IFilter } from '@app/types';
 import React, { Dispatch, SetStateAction } from 'react';
 
@@ -12,6 +14,10 @@ export default function RevenueDashboard({
   setfilterDialog: Dispatch<SetStateAction<boolean>>;
   filters: IFilter;
 }) {
+  const colorPicker = () => {
+    // return `"bg-[" + ${backgroundColor['OTHERS'] + "]"}`;
+    return 'bg-[#E3FCF2]';
+  };
   return (
     <div className="ml-20 mr-36 w-full">
       <div className="my-16 flex gap-72">
@@ -70,27 +76,59 @@ export default function RevenueDashboard({
           </div>
         </div>
       </div>
-      <div className="flex justify-between gap-6 border-b border-b-[#EFF1F6] pb-6">
-        <div>
-          <p className="text-2xl font-bold text-[#131316]">24 Transactions</p>
-          <p className="text-sm font-medium text-[#56616B]">
-            Your transactions for the last 7 days
-          </p>
+      <div>
+        <div className="flex justify-between gap-6 border-b border-b-[#EFF1F6] pb-6">
+          <div>
+            <p className="text-2xl font-bold text-[#131316]">24 Transactions</p>
+            <p className="text-sm font-medium text-[#56616B]">
+              Your transactions for the last 7 days
+            </p>
+          </div>
+          <div className="flex gap-3 font-semibold text-[#131316]">
+            <button
+              onClick={() => setfilterDialog(true)}
+              className="flex items-center gap-1 rounded-[100px] bg-[#EFF1F6] py-3 pl-[30px] pr-5"
+            >
+              Filter
+              <DropdownArrowIcon />
+            </button>
+            <button className="flex items-center gap-1 rounded-[100px] bg-[#EFF1F6] py-3 pl-[30px] pr-5">
+              Export list
+              <DownloadIcon />
+            </button>
+          </div>
         </div>
-        <div className="flex gap-3 font-semibold text-[#131316]">
-          <button
-            onClick={() => setfilterDialog(true)}
-            className="flex items-center gap-1 rounded-[100px] bg-[#EFF1F6] py-3 pl-[30px] pr-5"
-          >
-            Filter
-            <DropdownArrowIcon />
-          </button>
-          <button className="flex items-center gap-1 rounded-[100px] bg-[#EFF1F6] py-3 pl-[30px] pr-5">
-            Export list
-            <DownloadIcon />
-          </button>
+        <div className="pt-10">
+          <div className="flex h-[12rem] flex-col pr-2 gap-6 overflow-auto">
+            {Array(7)
+              .fill('a')
+              .map((item, index) => (
+                <div key={index} className="flex gap-3 font-medium">
+                  <div
+                    className={`${backgroundColor['OTHERS']} flex h-12 w-12 items-center justify-center rounded-full`}
+                  >
+                    {index % 2 === 0 ? <SlantUpArrow /> : <SlantDownArrow />}
+                  </div>
+                  <div className="flex w-full items-center justify-between">
+                    <div>
+                      <div className="text-[#131316]">Psychology of Money</div>
+                      <div className="text-sm text-[#56616B]">Roy Cash</div>
+                    </div>
+                    <div className="text-right">
+                      <div className="font-bold text-[#131316]">USD 600</div>
+                      <div className="text-sm text-[#56616B]">Apr 02,2022</div>
+                    </div>
+                  </div>
+                </div>
+              ))}
+          </div>
         </div>
       </div>
     </div>
   );
 }
+
+const backgroundColor = {
+  OTHERS: 'bg-[#E3FCF2]',
+  CASHWITHDRAWAL: 'bg-[#F9E3E0]',
+};
