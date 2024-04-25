@@ -7,31 +7,33 @@ import MediaKitIcon from '@app/assets/svg/MediaKitIcon';
 import InvoiceIcon from '@app/assets/svg/InvoiceIcon';
 import LeftArrowIcon from '@app/assets/svg/LeftArrowIcon';
 
-const links = [
-  {
-    href: '',
-    icon: <BioLinkIcon />,
-    name: 'Link in Bio',
-  },
-  {
-    href: '',
-    icon: <StoreIcon />,
-    name: 'Store',
-  },
-  {
-    href: '',
-    icon: <MediaKitIcon />,
-    name: 'Media Kit',
-  },
-  {
-    href: '',
-    icon: <InvoiceIcon />,
-    name: 'Invoicing',
-  },
-];
 
 export default function SideBar() {
   const [hoverOnItem, setHoverOnItem] = useState<number | null>(null);
+
+  const links = [
+    {
+      href: '',
+      icon: <BioLinkIcon greyedOut={!(hoverOnItem === 0)}/>,
+      name: 'Link in Bio',
+    },
+    {
+      href: '',
+      icon: <StoreIcon greyedOut={!(hoverOnItem === 1)}/>,
+      name: 'Store',
+    },
+    {
+      href: '',
+      icon: <MediaKitIcon greyedOut={!(hoverOnItem === 2)}/>,
+      name: 'Media Kit',
+    },
+    {
+      href: '',
+      icon: <InvoiceIcon greyedOut={!(hoverOnItem === 3)}/>,
+      name: 'Invoicing',
+    },
+  ];
+
   return (
     <div className="shadow-sideBarShadow w-12 rounded-[100px] p-1">
       <ul className="flex flex-col gap-2">
