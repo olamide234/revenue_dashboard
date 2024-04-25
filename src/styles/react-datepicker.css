@@ -1,5 +1,9 @@
 @import "react-datepicker/dist/react-datepicker.css";
 
+.react-datepicker-wrapper {
+ width: 100%;
+}
+
 .react-datepicker {
   font-family: "Inter", sans-serif;
   color: #8f95b2;

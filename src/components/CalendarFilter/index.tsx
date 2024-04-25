@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, forwardRef } from 'react';
 import InputLabel from '../InputLabel';
 import { ICalendarFilterProps, IFilter } from '../../types';
 import {
@@ -13,6 +13,8 @@ import {
 import { format } from 'date-fns';
 import DatePicker from 'react-datepicker';
 import '@app/styles/react-datepicker.css';
+import UpArrowIcon from '@app/assets/svg/UpArrowIcon';
+import DropdownArrowIcon from '@app/assets/svg/DropdownArrowIcon';
 
 export interface IDatePayload
   extends Pick<IFilter, 'end_date' | 'start_date'> {}
@@ -41,6 +43,27 @@ export default function CalendarFilter(props: ICalendarFilterProps) {
   const [startDate, setStartDate] = useState(new Date());
   const [endDate, setEndDate] = useState(new Date());
   const [selectedItem, setSelectedItem] = useState<string | null>(null);
+  // const [calendarOpen, setCalendarOpen] = useState(false)
+  //   const CustomInput = forwardRef<
+  //   HTMLButtonElement,
+  //   React.ComponentProps<'button'>
+  // >((props, ref) => (
+  //   <button
+  //     className={`flex w-full items-center gap-2.5 rounded-xl px-4 py-3.5 ${calendarOpen ? 'border-[3px] border-[#131316] bg-white' : 'border border-[#EFF1F6] bg-[#EFF1F6]'}`}
+  //     onClick={(e) => {
+  //       setCalendarOpen(true);
+  //       props.onClick?.(e);
+  //     }}
+  //     ref={ref}
+  //   >
+  //     <div className="w-full text-left">{props.value}</div>
+  //     {calendarOpen ? (
+  //       <UpArrowIcon />
+  //     ) : (
+  //       <DropdownArrowIcon width="8.83px" height="5.02px" />
+  //     )}
+  //   </button>
+  // ));
 
   const unselectedRangeFilter = 'bg-white text-[#131316]';
   const selectedRangeFilter = 'bg-[#131316] text-white';
@@ -80,6 +103,21 @@ export default function CalendarFilter(props: ICalendarFilterProps) {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [selectedItem]);
 
+  const CustomInput = forwardRef<
+    HTMLButtonElement,
+    React.ComponentProps<'button'>
+  >((props, ref) => (
+    <button
+      className={`flex w-full items-center gap-2.5 rounded-xl px-4 py-3.5 ${'border border-[#EFF1F6] bg-[#EFF1F6]'}`}
+      onClick={props.onClick}
+      ref={ref}
+    >
+      <div className="w-full text-left">{props.value}</div>
+
+      <DropdownArrowIcon width="8.83px" height="5.02px" />
+    </button>
+  ));
+
   const handleSelectRange = (dates: { startDate: Date; endDate: Date }) => {
     const { startDate: start, endDate: end } = dates;
     setStartDate(start);
@@ -112,34 +150,42 @@ export default function CalendarFilter(props: ICalendarFilterProps) {
       <div>
         <InputLabel label="Date Range" />
         <div className="flex gap-[6px]">
-          <DatePicker
-            selected={startDate}
-            onChange={(date) => {
-              setSelectedItem(null);
-              setStartDate(date as Date);
-              onFilter({
-                start_date: format(new Date(date as Date), 'yyyy-MM-dd'),
-              } as IDatePayload);
-            }}
-            startDate={startDate}
-            selectsStart
-            maxDate={startDate ? endDate : undefined}
-            useWeekdaysShort={true}
-          />
-          <DatePicker
-            selected={endDate}
-            onChange={(date) => {
-              setSelectedItem(null);
-              setEndDate(date as Date);
-              onFilter({
-                end_date: format(new Date(date as Date), 'yyyy-MM-dd'),
-              } as IDatePayload);
-            }}
-            endDate={endDate}
-            selectsEnd
-            minDate={endDate ? startDate : undefined}
-            useWeekdaysShort={true}
-          />
+          <div className="w-1/2">
+            <DatePicker
+              selected={startDate}
+              onChange={(date) => {
+                setSelectedItem(null);
+                setStartDate(date as Date);
+                onFilter({
+                  start_date: format(new Date(date as Date), 'yyyy-MM-dd'),
+                } as IDatePayload);
+              }}
+              startDate={startDate}
+              selectsStart
+              maxDate={startDate ? endDate : undefined}
+              useWeekdaysShort={true}
+              customInput={<CustomInput />}
+              dateFormat="dd MMM YYYY"
+            />
+          </div>
+          <div className="w-1/2">
+            <DatePicker
+              selected={endDate}
+              onChange={(date) => {
+                setSelectedItem(null);
+                setEndDate(date as Date);
+                onFilter({
+                  end_date: format(new Date(date as Date), 'yyyy-MM-dd'),
+                } as IDatePayload);
+              }}
+              endDate={endDate}
+              selectsEnd
+              minDate={endDate ? startDate : undefined}
+              useWeekdaysShort={true}
+              customInput={<CustomInput />}
+              dateFormat="dd MMM YYYY"
+            />
+          </div>
         </div>
       </div>
     </div>
