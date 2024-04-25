@@ -46,7 +46,7 @@ export default function SideBar() {
               {link.icon}
             </Link>
             <div
-              className={`${hoverOnItem === index ? 'visible' : 'invisible'} absolute left-12 z-10 flex items-center`}
+              className={`${hoverOnItem === index ? 'visible' : 'invisible'} absolute left-12 flex items-center`}
             >
               <LeftArrowIcon />
               <div className=" text-nowrap rounded-lg bg-[#131316] px-3 py-2 text-sm font-medium text-white shadow-sm">

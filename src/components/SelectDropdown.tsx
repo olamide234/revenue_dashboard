@@ -53,7 +53,7 @@ export default function SelectDropdown({
       </div>
 
       {openDropDown.state && (
-        <div className="shadow-sideBarShadow absolute z-30 w-full rounded-xl bg-white p-2">
+        <div className="shadow-sideBarShadow absolute z-20 w-full rounded-xl bg-white p-2">
           <div>
             {optionList.map((option: IOption, index: number) => (
               <div
