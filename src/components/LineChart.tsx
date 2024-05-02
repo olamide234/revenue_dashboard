@@ -10,7 +10,7 @@ export interface IGraphData {
 
 export interface IExpectedData {
   graphData: IGraphData[];
-  dateRangeData: string[];
+  dateRangeData: Date[];
 }
 
 export default function LineChart({ data }: { data: IExpectedData }) {

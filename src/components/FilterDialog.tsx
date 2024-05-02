@@ -1,5 +1,5 @@
 import React, { Dispatch, SetStateAction, useState } from 'react';
-import { IFilter } from '@app/types/index';
+import { IFilter, IFilterOptional } from '@app/types/index';
 import CloseIcon from '@app/assets/svg/CloseIcon';
 import CalendarFilter, { IDatePayload } from './CalendarFilter';
 import SelectDropdown, { IOpenDropdownType } from './SelectDropdown';
@@ -11,7 +11,7 @@ export default function FilterDialog({
 }: {
   setfilterDialog: Dispatch<SetStateAction<boolean>>;
   filters: IFilter;
-  handleFilter: Dispatch<SetStateAction<IFilter>>;
+  handleFilter: Dispatch<SetStateAction<IFilterOptional>>;
 }) {
   const [dateFilters, setDateFilters] = useState<IDatePayload>({});
 

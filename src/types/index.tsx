@@ -9,6 +9,13 @@ export interface ImageProps {
 export interface IFilter {
   start_date?: string;
   end_date?: string;
+  transaction_type: string[];
+  transaction_status: string[];
+}
+
+export interface IFilterOptional {
+  start_date?: string;
+  end_date?: string;
   transaction_type?: string[];
   transaction_status?: string[];
 }
