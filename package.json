@@ -13,7 +13,8 @@
     "lint:prettier-check": "prettier -c .",
     "lint:prettier": "prettier --write .",
     "lint:strict": "eslint --max-warnings=0 .",
-    "prepare": "husky"
+    "prepare": "husky",
+    "test": "jest"
   },
   "husky": {
     "hooks": {
