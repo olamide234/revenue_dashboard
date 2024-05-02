@@ -40,10 +40,8 @@ export default function SelectDropdown({
         }
         className={`flex items-center gap-2.5 rounded-xl px-4 py-3.5  ${openDropDown.state ? 'border-[3px] border-[#131316] bg-white' : 'border border-[#EFF1F6] bg-[#EFF1F6]'}`}
       >
-        <div className="h-6 w-full">
-          {openDropdownValue.length > 38
-            ? openDropdownValue.slice(0, 38) + '...'
-            : openDropdownValue}
+        <div className="h-6 w-full overflow-hidden text-ellipsis whitespace-nowrap">
+            {openDropdownValue}
         </div>
         {openDropDown.state ? (
           <UpArrowIcon />

@@ -6,6 +6,7 @@ import SideBar from '@app/components/SideBar';
 import FilterDialog from '@app/components/FilterDialog';
 import { IFilter } from '@app/types/index';
 import LoaderWrapper from '@app/components/LoaderWrapper';
+import useFilterTransaction from '@app/utils/useFilterTransaction';
 
 export default function Home() {
   const [openDialog, setOpenDialog] = useState<boolean>(false);
@@ -16,7 +17,6 @@ export default function Home() {
   const [user, setUser] = useState();
   const [wallet, setWallet] = useState();
   const [transactions, setTransactions] = useState();
-  console.log(transactions, 'transactions');
 
   useEffect(() => {
     (() => {
@@ -90,12 +90,11 @@ export default function Home() {
     })();
   }, []);
 
-  const handleFilter = (filters: object) => {
-    setFilters((prevState: IFilter) => ({
-      ...prevState,
-      ...filters,
-    }));
-  };
+  const { handleFilter, filteredTransactionData } = useFilterTransaction(
+    transactions,
+    filters,
+    setFilters
+  );
 
   const overlay =
     'fixed w-full h-full top-0 right-0 left-0 bottom-0 bg-[#00000020] z-10 cursor-pointer';
@@ -117,7 +116,7 @@ export default function Home() {
             setfilterDialog={setOpenDialog}
             filters={filters}
             userWallet={wallet}
-            userTransactions={transactions}
+            userTransactions={filteredTransactionData}
           />
         </LoaderWrapper>
       </div>
