@@ -28,9 +28,9 @@ interface ITransactionMetaData {
   quantity: number;
   type: string;
 }
-interface IUserTransaction {
+export interface IUserTransaction {
   amount: number;
-  date: string;
+  date: Date;
   metadata: ITransactionMetaData;
   payment_reference: string;
   status: keyof IStatus;
@@ -49,7 +49,7 @@ export default function RevenueDashboard({
   userTransactions: IUserTransaction[] | undefined;
 }) {
   const graphData = (): IExpectedData => {
-    const dateRangeData: string[] = [];
+    const dateRangeData: Date[] = [];
     const transactions = userTransactions
       ? userTransactions?.map((userTransaction, index) => {
           dateRangeData.push(userTransaction.date);
@@ -70,6 +70,17 @@ export default function RevenueDashboard({
 
     return { graphData: gD, dateRangeData: dateRangeData };
   };
+
+  let numOfFiltersApplied = 0;
+  if (filters.transaction_type.length > 0) {
+    numOfFiltersApplied += 1;
+  }
+  if (filters.transaction_status.length > 0) {
+    numOfFiltersApplied += 1;
+  }
+  if (filters.end_date || filters.start_date) {
+    numOfFiltersApplied += 1;
+  }
 
   return (
     <div className="ml-5 mr-9 w-full lg:ml-20 lg:mr-36">
@@ -146,6 +157,11 @@ export default function RevenueDashboard({
               className="flex items-center gap-1 rounded-[100px] bg-[#EFF1F6] py-3 pl-[30px] pr-5"
             >
               Filter
+              {numOfFiltersApplied > 0 && (
+                <div className="flex h-5 w-5 items-center justify-center rounded-full bg-[#131316] text-xs font-medium text-white">
+                  {numOfFiltersApplied}
+                </div>
+              )}
               <DropdownArrowIcon />
             </button>
             <button className="flex items-center gap-1 rounded-[100px] bg-[#EFF1F6] py-3 pl-[30px] pr-5">
